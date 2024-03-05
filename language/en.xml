@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.woltlab.com https://www.woltlab.com/XSD/6.0/language.xsd"
+    languagecode="en" languagename="English">
+    <import>
+        <category name="wcf.acp.box">
+            <item
+                name="wcf.acp.box.boxController.info.daries.weatherWarning.forestFireHazardIndexWBI"><![CDATA[Weather warnings DWD (Forest Fire Hazard Index WBI)]]></item>
+            <item name="wcf.acp.box.boxController.info.daries.weatherWarning.germany"><![CDATA[Weather warnings DWD (Germany)]]></item>
+            <item name="wcf.acp.box.boxController.info.daries.weatherWarning.grasslandFireIndex"><![CDATA[Weather warnings DWD (Grassland - Fire Index)]]></item>
+            <item name="wcf.acp.box.boxController.info.daries.weatherWarning.region"><![CDATA[Weather warnings DWD (Region)]]></item>
+        </category>
+
+        <category name="wcf.acp.option">
+            <item name="wcf.acp.option.category.user.weatherWarning"><![CDATA[Weather warnings DWD]]></item>
+            <item name="wcf.acp.option.module_weather_warning"><![CDATA[Weather warnings]]></item>
+            <item name="wcf.acp.option.weather_warning_default_region"><![CDATA[Region]]></item>
+            <item name="wcf.acp.option.weather_warning_default_region.description"><![CDATA[Enter a standard region here. This region is used if the user has not entered anything in their profile.]]></item>
+            <item name="wcf.acp.option.weather_warning_enable_forestFireHazardIndexWBI"><![CDATA[Show Forest Fire Hazard Index WBI]]></item>
+            <item name="wcf.acp.option.weather_warning_enable_grasslandFireIndex"><![CDATA[Show Grassland - Fire Index]]></item>
+        </category>
+
+        <category name="wcf.user.option">
+            <item name="wcf.user.option.category.settings.general.weatherWarning"><![CDATA[Weather warnings DWD]]></item>
+            <item name="wcf.user.option.error.noExist"><![CDATA[Please enter a valid region.]]></item>
+            <item name="wcf.user.option.weatherWarningForestFireHazardIndexGermanyEnable"><![CDATA[View Forest Fire Hazard Index WBI]]></item>
+            <item name="wcf.user.option.weatherWarningGermanyEnable"><![CDATA[View germany weather warnings]]></item>
+            <item name="wcf.user.option.weatherWarningGrasslandFireIndexGermanyEnable"><![CDATA[View Grassland - Fire Index]]></item>
+            <item name="wcf.user.option.weatherWarningRegion"><![CDATA[Region]]></item>
+            <item name="wcf.user.option.weatherWarningRegionEnable"><![CDATA[View regional weather warnings]]></item>
+        </category>
+
+        <category name="wcf.weatherWarning">
+            <item name="wcf.weatherWarning.dwd"><![CDATA[Weather warnings DWD]]></item>
+            <item name="wcf.weatherWarning.dwd.region"><![CDATA[Weather warnings DWD ({if $region|empty}Region{else}{$region}{/if}){if !$region|empty && $__wcf->user->getUserOption('weatherWarningRegion')|empty} <a href="#" class="jsTooltip weatherWarningInfo{@$box->boxID} jsStaticDialog" data-dialog-id="weatherWarningRegionDialog{@$box->boxID}" title="Info"><span class="red">{icon name='info-circle'}</span></a>{/if}]]></item>
+            <item name="wcf.weatherWarning.empty"><![CDATA[There are currently no warnings for the region ({$region}).]]></item>
+            <item name="wcf.weatherWarning.empty.region"><![CDATA[If you fill in the "Region" field in your {if $__wcf->getUserProfileHandler()->canEditOwnProfile()}<a href="{link controller='User' object=$__wcf->user}editOnInit=true#about{/link}">profile</a>{else}profile{/if}, you will receive regional warnings from the DWD here.]]></item>
+            <item name="wcf.weatherWarning.end"><![CDATA[End]]></item>
+            <item name="wcf.weatherWarning.forestFireHazardIndex"><![CDATA[Forest Fire Hazard Index WBI]]></item>
+            <item name="wcf.weatherWarning.grasslandFireIndex"><![CDATA[Grassland - Fire Index]]></item>
+            <item name="wcf.weatherWarning.more.information"><![CDATA[More information]]></item>
+            <item name="wcf.weatherWarning.notice"><![CDATA[For your region ({$__wcf->getUserWeatherWarningHandler()->getRegion()}) there is a weather warning from the DWD!]]></item>
+            <item name="wcf.weatherWarning.region.info"><![CDATA[Info]]></item>
+            <item name="wcf.weatherWarning.region.info.text"><![CDATA[The region display has been set up by the administrator of this page.<br />
+<br />
+You can customize {if $__wcf->getUserProfileHandler()->canEditOwnProfile()}<a href="{link controller='User' object=$__wcf->user forceFrontend=true}editOnInit=true#about{/link}">your profile</a>{else}your profile{/if} by specifying your region to tailor the region display to your personal preferences.]]></item>
+            <item name="wcf.weatherWarning.start"><![CDATA[Start]]></item>
+            <item name="wcf.weatherWarning.viewFullSize"><![CDATA[View full size]]></item>
+        </category>
+    </import>
+</language>
