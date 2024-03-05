@@ -4,22 +4,22 @@
     <import>
         <!-- box controllers -->
         <type>
-            <name>info.daries.weatherWarning.forestFireHazardIndexWBI</name>
+            <name>dev.daries.weatherWarning.forestFireHazardIndexWBI</name>
             <definitionname>com.woltlab.wcf.boxController</definitionname>
             <classname>wcf\system\box\WeatherWarningForestFireHazardIndexGermanyBoxController</classname>
         </type>
         <type>
-            <name>info.daries.weatherWarning.germany</name>
+            <name>dev.daries.weatherWarning.germany</name>
             <definitionname>com.woltlab.wcf.boxController</definitionname>
             <classname>wcf\system\box\WeatherWarningGermanyBoxController</classname>
         </type>
         <type>
-            <name>info.daries.weatherWarning.grasslandFireIndex</name>
+            <name>dev.daries.weatherWarning.grasslandFireIndex</name>
             <definitionname>com.woltlab.wcf.boxController</definitionname>
             <classname>wcf\system\box\WeatherWarningGrasslandFireIndexGermanyBoxController</classname>
         </type>
         <type>
-            <name>info.daries.weatherWarning.region</name>
+            <name>dev.daries.weatherWarning.region</name>
             <definitionname>com.woltlab.wcf.boxController</definitionname>
             <classname>wcf\system\box\WeatherWarningRegionBoxController</classname>
         </type>

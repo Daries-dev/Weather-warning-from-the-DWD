@@ -1,6 +1,6 @@
 Weather-Warning
 ===========================
-Identifier: info.daries.weatherWarning
+Identifier: dev.daries.weatherWarning
 
 Weather-Warning-Plugin for WoltLab Suite 5.5
 

@@ -5,10 +5,10 @@
     <import>
         <category name="wcf.acp.box">
             <item
-                name="wcf.acp.box.boxController.info.daries.weatherWarning.forestFireHazardIndexWBI"><![CDATA[Wetterwarnungen DWD (Waldbrand-Gefahrenindex WBI)]]></item>
-            <item name="wcf.acp.box.boxController.info.daries.weatherWarning.germany"><![CDATA[Wetterwarnungen DWD (Deutschland)]]></item>
-            <item name="wcf.acp.box.boxController.info.daries.weatherWarning.grasslandFireIndex"><![CDATA[Wetterwarnungen DWD (Grasland - Feuerindex)]]></item>
-            <item name="wcf.acp.box.boxController.info.daries.weatherWarning.region"><![CDATA[Wetterwarnungen DWD (Region)]]></item>
+                name="wcf.acp.box.boxController.dev.daries.weatherWarning.forestFireHazardIndexWBI"><![CDATA[Wetterwarnungen DWD (Waldbrand-Gefahrenindex WBI)]]></item>
+            <item name="wcf.acp.box.boxController.dev.daries.weatherWarning.germany"><![CDATA[Wetterwarnungen DWD (Deutschland)]]></item>
+            <item name="wcf.acp.box.boxController.dev.daries.weatherWarning.grasslandFireIndex"><![CDATA[Wetterwarnungen DWD (Grasland - Feuerindex)]]></item>
+            <item name="wcf.acp.box.boxController.dev.daries.weatherWarning.region"><![CDATA[Wetterwarnungen DWD (Region)]]></item>
         </category>
 
         <category name="wcf.acp.option">

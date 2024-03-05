@@ -4,7 +4,7 @@
     </a>
     <img src="{@$germanyMapInfo}" class="germanyMapInfo" alt="">
     
-    <a href="https://www.dwd.de/DE/wetter/warnungen_gemeinden/warnWetter_node.htm"{if EXTERNAL_LINK_TARGET_BLANK} target="_blank"{/if} class="button"><span class="icon icon24 fa-info"></span> <span>{lang}wcf.weatherWarning.more.information{/lang}</span></a>
+    <a href="https://www.dwd.de/DE/wetter/warnungen_gemeinden/warnWetter_node.htm"{if EXTERNAL_LINK_TARGET_BLANK} target="_blank"{/if} class="button">{icon name='info' size=24} <span>{lang}wcf.weatherWarning.more.information{/lang}</span></a>
 </div>
 
 <div id="weatherWarningMapDialog" class="jsStaticDialogContent" style="display: none;" data-title="{lang}wcf.weatherWarning.dwd{/lang}">

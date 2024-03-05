@@ -2,12 +2,12 @@
 <data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.woltlab.com https://www.woltlab.com/XSD/6.0/box.xsd">
     <import>
-        <box identifier="info.daries.weatherWarning.forestFireHazardIndexWBI">
+        <box identifier="dev.daries.weatherWarning.forestFireHazardIndexWBI">
             <name language="de">Waldbrand-Gefahrenindex WBI (Deutschland)</name>
             <name language="en">Forest Fire Hazard Index WBI (Germany)</name>
             <boxType>system</boxType>
             <position>sidebarRight</position>
-            <objectType>info.daries.weatherWarning.forestFireHazardIndexWBI</objectType>
+            <objectType>dev.daries.weatherWarning.forestFireHazardIndexWBI</objectType>
             <showHeader>1</showHeader>
             <visibleEverywhere>0</visibleEverywhere>
             <visibilityExceptions>
@@ -20,12 +20,12 @@
                 <title>Forest Fire Hazard Index WBI</title>
             </content>
         </box>
-        <box identifier="info.daries.weatherWarning.germany">
+        <box identifier="dev.daries.weatherWarning.germany">
             <name language="de">Wetterwarnungen DWD (Deutschland)</name>
             <name language="en">Weather warnings DWD (Germany)</name>
             <boxType>system</boxType>
             <position>sidebarRight</position>
-            <objectType>info.daries.weatherWarning.germany</objectType>
+            <objectType>dev.daries.weatherWarning.germany</objectType>
             <showHeader>1</showHeader>
             <visibleEverywhere>0</visibleEverywhere>
             <visibilityExceptions>
@@ -38,12 +38,12 @@
                 <title>Weather warnings DWD</title>
             </content>
         </box>
-        <box identifier="info.daries.weatherWarning.grasslandFireIndex">
+        <box identifier="dev.daries.weatherWarning.grasslandFireIndex">
             <name language="de">Grasland - Feuerindex (Deutschland)</name>
             <name language="en">Grassland - Fire Index (Germany)</name>
             <boxType>system</boxType>
             <position>sidebarRight</position>
-            <objectType>info.daries.weatherWarning.grasslandFireIndex</objectType>
+            <objectType>dev.daries.weatherWarning.grasslandFireIndex</objectType>
             <showHeader>1</showHeader>
             <visibleEverywhere>0</visibleEverywhere>
             <visibilityExceptions>
@@ -56,12 +56,12 @@
                 <title>Grassland - Fire Index</title>
             </content>
         </box>
-        <box identifier="info.daries.weatherWarning.region">
+        <box identifier="dev.daries.weatherWarning.region">
             <name language="de">Wetterwarnungen DWD (Region)</name>
             <name language="en">Weather warnings DWD (Region)</name>
             <boxType>system</boxType>
             <position>sidebarRight</position>
-            <objectType>info.daries.weatherWarning.region</objectType>
+            <objectType>dev.daries.weatherWarning.region</objectType>
             <visibleEverywhere>0</visibleEverywhere>
             <cssClassName>weatherWarningRegionBox</cssClassName>
             <visibilityExceptions>
