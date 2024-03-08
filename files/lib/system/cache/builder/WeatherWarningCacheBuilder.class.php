@@ -2,8 +2,12 @@
 
 namespace wcf\system\cache\builder;
 
+use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Exception\TransferException;
+use GuzzleHttp\Psr7\Request;
+use Psr\Http\Client\ClientExceptionInterface;
 use wcf\system\exception\SystemException;
-use wcf\util\HTTPRequest;
+use wcf\system\io\HttpFactory;
 use wcf\util\JSON;
 
 /**
@@ -25,6 +29,41 @@ class WeatherWarningCacheBuilder extends AbstractCacheBuilder
      */
     protected $maxLifetime = 600;
 
+    private function getHttpClient(): ClientInterface
+    {
+        return HttpFactory::makeClientWithTimeout(5);
+    }
+
+    private function loadImage(string $name, string $url, array &$data)
+    {
+        $request = new Request('GET', $url, ['accept' => 'image/*',]);
+
+        $dataString = "";
+        try {
+            $response = $this->getHttpClient()->send($request);
+
+            while (!$response->getBody()->eof()) {
+                try {
+                    $dataString .= $response->getBody()->read(8192);
+                } catch (\RuntimeException $e) {
+                    throw new \DomainException(
+                        'Failed to read response body.',
+                        0,
+                        $e
+                    );
+                }
+            }
+        } catch (TransferException $e) {
+            throw new \DomainException('Failed to request', 0, $e);
+        } finally {
+            if ($response && $response->getBody()) {
+                $response->getBody()->close();
+            }
+
+            $data[$name] = "data:image/png;base64," . base64_encode($dataString);
+        }
+    }
+
     /**
      * @inheritDoc
      */
@@ -38,52 +77,28 @@ class WeatherWarningCacheBuilder extends AbstractCacheBuilder
         ];
 
         if (WEATHER_WARNING_ENABLE_FORESTFIREHAZARDINDEXWBI) {
-            // load germany forest fire hazard index WBI map
-            try {
-                $request = new HTTPRequest(self::GERMANY_FORESTFIREHAZARDINDEXWBI_URL);
-                $request->execute();
-                $reply = $request->getReply();
-
-                $data['forestFireHazardIndexWBI'] = "data:image/png;base64," . base64_encode($reply['body']);
-            } catch (SystemException $e) {
-            }
+            // load germany forest fire index wbi map
+            $this->loadImage('forestFireHazardIndexWBI', self::GERMANY_FORESTFIREHAZARDINDEXWBI_URL, $data);
         }
 
         if (WEATHER_WARNING_ENABLE_GRASSLANDFIREINDEX) {
             // load germany grassland fire index map
-            try {
-                $request = new HTTPRequest(self::GERMANY_GRASSLANDFIREINDEX_URL);
-                $request->execute();
-                $reply = $request->getReply();
-
-                $data['grasslandFireIndex'] = "data:image/png;base64," . base64_encode($reply['body']);
-            } catch (SystemException $e) {
-            }
+            $this->loadImage('grasslandFireIndex', self::GERMANY_GRASSLANDFIREINDEX_URL, $data);
         }
 
         // load germany map
-        try {
-            $request = new HTTPRequest(self::GERMANY_MAP_URL);
-            $request->execute();
-            $reply = $request->getReply();
-
-            $data['germanyMap'] = "data:image/png;base64," . base64_encode($reply['body']);
-        } catch (SystemException $e) {
-        }
+        $this->loadImage('germanyMap', self::GERMANY_MAP_URL, $data);
 
         // load region warning information
-        try {
-            $request = new HTTPRequest(self::GERMANY_REGION_URL);
-            $request->execute();
-
-            $reply = $request->getReply()['body'];
-            $reply = str_replace('warnWetter.loadWarnings(', '', $reply);
-            $reply = mb_substr($reply, 0, -2);
-
-            $data['warnings'] = $this->readWarnings(JSON::decode($reply)['warnings']);
-            $this->sortWarnings($data['warnings']);
-        } catch (SystemException $e) {
-        }
+        $request = new Request('GET', self::GERMANY_REGION_URL, [
+            'accept' => 'application/json',
+        ]);
+        $response = $this->getHttpClient()->send($request);
+        $parsed = (string)$response->getBody();
+        $parsed = \str_replace('warnWetter.loadWarnings(', '', $parsed);
+        $parsed = \mb_substr($parsed, 0, -2);
+        $data['warnings'] = $this->readWarnings(JSON::decode($parsed)['warnings']);
+        $this->sortWarnings($data['warnings']);
 
         return $data;
     }
@@ -154,8 +169,8 @@ class WeatherWarningCacheBuilder extends AbstractCacheBuilder
     {
         $value = \strtolower($value);
 
-        $search = array(" ", "ä", "Ä", "ö", "Ö", "ü", "Ü", "ß");
-        $replace = array("_", "ae", "ae", "oe", "oe", "ue", "ue", "ss");
+        $search = [" ", "ä", "Ä", "ö", "Ö", "ü", "Ü", "ß"];
+        $replace = ["_", "ae", "ae", "oe", "oe", "ue", "ue", "ss"];
         $patched = \str_replace($search, $replace, $value);
 
         return $patched;
