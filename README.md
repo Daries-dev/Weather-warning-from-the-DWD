@@ -10,4 +10,4 @@ If you want to support the development, you are allowed to use pull requests or 
 
 License
 ----------------
-Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0) <https://creativecommons.org/licenses/by-nd/4.0/>
+Daries.dev - Free License <https://daries.dev/license-for-free-plugins>
