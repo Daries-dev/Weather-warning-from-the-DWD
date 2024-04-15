@@ -1,8 +1,4 @@
 {
-    "name": "@daries/WeatherWarning",
-    "files": [
-        "ts/**/*"
-    ],
     "devDependencies": {
         "@typescript-eslint/eslint-plugin": "^6.5.0",
         "@typescript-eslint/parser": "^6.5.0",
@@ -12,8 +8,6 @@
         "typescript": "^5.2.2"
     },
     "dependencies": {
-        "@types/jquery": "^3.5.18",
-        "tslib": "^2.6.2",
-        "@woltlab/d.ts": "https://github.com/WoltLab/d.ts.git#4040fc083245edeb2f8832d4613b9e76aa9c17a5"
+        "@woltlab/d.ts": "https://github.com/WoltLab/d.ts.git#42e01f15f93f6afd2711c878f87e7b51358c3fe7"
     }
 }
