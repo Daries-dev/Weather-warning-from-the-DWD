@@ -17,7 +17,7 @@ class UiWeatherWarningRegionSearchInput extends UiSearchInput {
         },
       },
       options,
-    ) as any;
+    ) as SearchInputOptions;
 
     super(element, options);
   }
