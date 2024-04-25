@@ -19,7 +19,7 @@ class WeatherWarningForestFireHazardIndexGermanyBoxController extends AbstractBo
      */
     protected function loadContent(): void
     {
-        if (MODULE_WEATHER_WARNING && WEATHER_WARNING_ENABLE_FORESTFIREHAZARDINDEXWBI) {
+        if (MODULE_WEATHER_WARNING && WEATHER_WARNING_ENABLE_FOREST_FIRE_HAZARD_INDEX_WBI) {
             if (WCF::getUser()->userID && !WCF::getUser()->getUserOption('weatherWarningForestFireHazardIndexGermanyEnable')) return;
 
             $data = [

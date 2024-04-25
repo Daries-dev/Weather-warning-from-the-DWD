@@ -19,7 +19,7 @@ class WeatherWarningGrasslandFireIndexGermanyBoxController extends AbstractBoxCo
      */
     protected function loadContent(): void
     {
-        if (MODULE_WEATHER_WARNING && WEATHER_WARNING_ENABLE_GRASSLANDFIREINDEX) {
+        if (MODULE_WEATHER_WARNING && WEATHER_WARNING_ENABLE_GRASSLAND_FIRE_INDEX) {
             if (WCF::getUser()->userID && !WCF::getUser()->getUserOption('weatherWarningGrasslandFireIndexGermanyEnable')) return;
 
             $data = [

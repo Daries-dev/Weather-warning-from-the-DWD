@@ -16,8 +16,8 @@
             <item name="wcf.acp.option.module_weather_warning"><![CDATA[Wetterwarnung]]></item>
             <item name="wcf.acp.option.weather_warning_default_region"><![CDATA[Region]]></item>
             <item name="wcf.acp.option.weather_warning_default_region.description"><![CDATA[Gebe hier einen Standard Region an. Diese Region wird genommen, wenn der Benutzer keine Angabe in seinem Profil vorgenommen hat.]]></item>
-            <item name="wcf.acp.option.weather_warning_enable_forestFireHazardIndexWBI"><![CDATA[Waldbrand-Gefahrenindex WBI anzeigen]]></item>
-            <item name="wcf.acp.option.weather_warning_enable_grasslandFireIndex"><![CDATA[Grasland - Feuerindex anzeigen]]></item>
+            <item name="wcf.acp.option.weather_warning_enable_forest_fire_hazard_index_wbi"><![CDATA[Waldbrand-Gefahrenindex WBI anzeigen]]></item>
+            <item name="wcf.acp.option.weather_warning_enable_grassland_fire_index"><![CDATA[Grasland - Feuerindex anzeigen]]></item>
         </category>
 
         <category name="wcf.user.option">
@@ -57,4 +57,9 @@ Um {if LANGUAGE_USE_INFORMAL_VARIANT}Deine{else}Ihre{/if} Anzeige zu personalisi
             <item name="wcf.weatherWarning.viewFullSize"><![CDATA[Großansicht]]></item>
         </category>
     </import>
+
+    <delete>
+        <item name="wcf.acp.option.weather_warning_enable_forestFireHazardIndexWBI" />
+        <item name="wcf.acp.option.weather_warning_enable_grasslandFireIndex" />
+    </delete>
 </language>

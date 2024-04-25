@@ -76,12 +76,12 @@ class WeatherWarningCacheBuilder extends AbstractCacheBuilder
             'warnings' => []
         ];
 
-        if (WEATHER_WARNING_ENABLE_FORESTFIREHAZARDINDEXWBI) {
+        if (WEATHER_WARNING_ENABLE_FOREST_FIRE_HAZARD_INDEX_WBI) {
             // load germany forest fire index wbi map
             $this->loadImage('forestFireHazardIndexWBI', self::GERMANY_FORESTFIREHAZARDINDEXWBI_URL, $data);
         }
 
-        if (WEATHER_WARNING_ENABLE_GRASSLANDFIREINDEX) {
+        if (WEATHER_WARNING_ENABLE_GRASSLAND_FIRE_INDEX) {
             // load germany grassland fire index map
             $this->loadImage('grasslandFireIndex', self::GERMANY_GRASSLANDFIREINDEX_URL, $data);
         }
