@@ -7,8 +7,8 @@
         <packagename language="de"><![CDATA[Wetterwarnungen vom DWD]]></packagename>
         <packagedescription><![CDATA[Displays the current severe weather warnings for Germany and your region.]]></packagedescription>
         <packagedescription language="de"><![CDATA[Zeigt die aktuellen Unwetterwarnungen für Deutschland und deiner Region an.]]></packagedescription>
-        <version>1.3.2</version>
-        <date>2024-04-24</date>
+        <version>1.3.3</version>
+        <date>2024-04-25</date>
     </packageinformation>
 
     <authorinformation>
@@ -41,12 +41,11 @@
 		<instruction type="script">acp/install_dev.daries.weatherWarning.php</instruction>
     </instructions>
 
-    <instructions type="update" fromversion="1.3.1">
+    <instructions type="update" fromversion="1.3.2">
         <instruction type="file" />
         <instruction type="template" />
-        <instruction type="templateListener" />
+        <instruction type="option" />
         <instruction type="language" />
-        <instruction type="fileDelete" />
     </instructions>
 
 </package>
