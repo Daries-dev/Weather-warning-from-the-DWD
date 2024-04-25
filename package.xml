@@ -26,9 +26,9 @@
     </excludedpackages>
 
     <instructions type="install">
-        <instruction type="sql" />
-        <instruction type="acpTemplate" />
         <instruction type="file" />
+		<instruction type="database">acp/database/install_dev.daries.weatherWarning.php</instruction>
+        <instruction type="acpTemplate" />
         <instruction type="template" />
         <instruction type="coreObject" />
         <instruction type="objectType" />
@@ -38,6 +38,7 @@
         <instruction type="eventListener" />
         <instruction type="templateListener" />
         <instruction type="language" />
+		<instruction type="script">acp/install_dev.daries.weatherWarning.php</instruction>
     </instructions>
 
     <instructions type="update" fromversion="1.3.1">
