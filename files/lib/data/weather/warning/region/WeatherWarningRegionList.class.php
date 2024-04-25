@@ -9,7 +9,7 @@ use wcf\data\DatabaseObjectList;
  * 
  * @author  Marco Daries, Alexander Langer (Source of ideas)
  * @copyright   2020-2024 Daries.dev
- * @license Daries.dev - Free License <https://daries.dev/license-for-free-plugins>
+ * @license Daries.dev - Free License <https://daries.dev/en/license-for-free-plugins>
  *
  * @method      WeatherWarningRegion        current()
  * @method      WeatherWarningRegion[]      getObjects()
