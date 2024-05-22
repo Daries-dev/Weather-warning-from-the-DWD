@@ -2,7 +2,37 @@
 <data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/6.0/fileDelete.xsd">
     <delete>
-        <file>images/weather/germanyMapInfo.png</file>
+        <file>images/weather/dauerregen.png</file>
+        <file>images/weather/ergiebiger_dauerregen.png</file>
+        <file>images/weather/extrem_ergiebiger_dauerregen.png</file>
+        <file>images/weather/extrem_starke_schneeverwehung.png</file>
+        <file>images/weather/extrem_starker_schneefall.png</file>
+        <file>images/weather/extreme_heftiger_starkregen.png</file>
+        <file>images/weather/extreme_orkanboeen.png</file>
+        <file>images/weather/extremes_gewitter.png</file>
+        <file>images/weather/frost.png</file>
+        <file>images/weather/gewitter.png</file>
+        <file>images/weather/glaette.png</file>
+        <file>images/weather/glatteis.png</file>
+        <file>images/weather/heftiger_starkregen.png</file>
+        <file>images/weather/leichter_schneefall.png</file>
+        <file>images/weather/nebel.png</file>
+        <file>images/weather/oertlich_glatteis.png</file>
+        <file>images/weather/orkanartige_boeen.png</file>
+        <file>images/weather/orkanboeen.png</file>
+        <file>images/weather/schneefall.png</file>
+        <file>images/weather/schneeverwehung.png</file>
+        <file>images/weather/schwere_sturmboeen.png</file>
+        <file>images/weather/schweres_gewitter.png</file>
+        <file>images/weather/starke_schneeverwehung.png</file>
+        <file>images/weather/starker_schneefall.png</file>
+        <file>images/weather/starkes_gewitter.png</file>
+        <file>images/weather/starkes_tauwetter.png</file>
+        <file>images/weather/starkregen.png</file>
+        <file>images/weather/strenger_frost.png</file>
+        <file>images/weather/sturmboeen.png</file>
+        <file>images/weather/tauwetter.png</file>
+        <file>images/weather/windboeen.png</file>
     </delete>
 </data>
         
