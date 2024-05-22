@@ -6,6 +6,7 @@ use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\TransferException;
 use GuzzleHttp\Psr7\Request;
 use Psr\Http\Client\ClientExceptionInterface;
+use wcf\data\weather\warning\WeatherWarning;
 use wcf\system\exception\SystemException;
 use wcf\system\io\HttpFactory;
 use wcf\util\JSON;
@@ -97,54 +98,33 @@ class WeatherWarningCacheBuilder extends AbstractCacheBuilder
         $parsed = (string)$response->getBody();
         $parsed = \str_replace('warnWetter.loadWarnings(', '', $parsed);
         $parsed = \mb_substr($parsed, 0, -2);
-        $data['warnings'] = $this->readWarnings(JSON::decode($parsed)['warnings']);
-        $this->sortWarnings($data['warnings']);
+
+        $weatherAlerts = JSON::decode($parsed);
+        $data['weatherAlertsTime'] = ($weatherAlerts['time'] / 1000);
+        $data['weatherAlerts'] = \array_merge_recursive(
+            $this->readWeatherAlerts($weatherAlerts['warnings']),
+            $this->readWeatherAlerts($weatherAlerts['vorabInformation'])
+        );
+        //$this->sortWarnings($data['weatherAlerts']);
 
         return $data;
     }
 
     /**
-     * Reads the data from DWD and sorts them by region.
-     * Returns a list by region.
+     * Reads weather alerts and sorts by region.
      */
-    protected function readWarnings(array $warnings): array
+    protected function readWeatherAlerts(array $weatherAlerts): array
     {
         $list = [];
-        if (empty($warnings)) return $list;
+        if (empty($weatherAlerts)) return $list;
 
-        foreach ($warnings as $warningDatas) {
-            foreach ($warningDatas as $warning) {
-                if (!isset($list[$warning['regionName']])) $list[$warning['regionName']] = [];
-
-                $newEntry = [
-                    'altitudeStart' => $warning['altitudeStart'],
-                    'altitudeEnd' => $warning['altitudeEnd'],
-                    'description' => $warning['description'],
-                    'end' => ($warning['end'] / 1000),
-                    'event' => $this->umlautsConvert($warning['event']),
-                    'headline' => $warning['headline'],
-                    'instruction' => $warning['instruction'],
-                    'level' => $warning['level'],
-                    'regionName' => $warning['regionName'],
-                    'start' => ($warning['start'] / 1000),
-                    'state' => $warning['state'],
-                    'stateShort' => $warning['stateShort'],
-                    'type' => $warning['type']
-                ];
-
-                $exist = false;
-                foreach ($list[$warning['regionName']] as $entry) {
-                    if (empty(\array_diff($entry, $newEntry))) {
-                        $exist = true;
-                    }
-                }
-
-                if (!$exist) {
-                    $list[$warning['regionName']][] = $newEntry;
-                }
+        foreach ($weatherAlerts as $infos) {
+            foreach ($infos as $info) {
+                $weatherWarning = WeatherWarning::createWarning($info);
+                $list[$weatherWarning->getRegionName()] ??= [];
+                $list[$weatherWarning->getRegionName()][] = $weatherWarning;
             }
         }
-
         return $list;
     }
 
@@ -160,19 +140,5 @@ class WeatherWarningCacheBuilder extends AbstractCacheBuilder
 
             \array_multisort($level, SORT_ASC, $start, SORT_ASC, $end, SORT_ASC, $warningDatas);
         }
-    }
-
-    /**
-     * Converts umlauts and returns the changed value
-     */
-    protected function umlautsConvert(string $value): string
-    {
-        $value = \strtolower($value);
-
-        $search = [" ", "ä", "Ä", "ö", "Ö", "ü", "Ü", "ß"];
-        $replace = ["_", "ae", "ae", "oe", "oe", "ue", "ue", "ss"];
-        $patched = \str_replace($search, $replace, $value);
-
-        return $patched;
     }
 }

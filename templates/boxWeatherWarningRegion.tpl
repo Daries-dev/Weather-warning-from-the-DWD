@@ -7,30 +7,30 @@
             {foreach from=$warnings item=warning}
                 <div class="weatherWarningRegion">
                     <div class="headline">
-                        <img src="{@$__wcf->getPath()}images/weather/{$warning[event]}.png" alt="">
-                        <span>{$warning[headline]}</span>
+                        {@$warning->getIcon()}
+                        <span>{$warning->getHeadline()}</span>
                     </div>
 
                     <div class="warnLevel">
                         <div class="warnColor"></div>
-                        <div class="levelRules level{@$warning[level]}"></div>
+                        <div class="levelRules level{$warning->getLevel()}"></div>
                     </div>
 
                     <dl class="plain dataList containerContent">
                         <dt><label>{lang}wcf.weatherWarning.start{/lang}</label></dt>
-                        <dd>{@$warning[start]|plainTime}</dd>
+                        <dd>{@$warning->getStart()|plainTime}</dd>
 
                         <dt><label>{lang}wcf.weatherWarning.end{/lang}</label></dt>
-                        <dd>{@$warning[end]|plainTime}</dd>
+                        <dd>{@$warning->getEnd()|plainTime}</dd>
                     </dl>
 
                     <div class="description small">
-                        {$warning[description]}
+                        {$warning->getDescription()}
                     </div>
 
-                    {if !$warning[instruction]|empty}
+                    {if !$warning->getInstruction()|empty}
                         <div class="instruction small">
-                            {$warning[instruction]}
+                            {$warning->getInstruction()}
                         </div>
                     {/if}
                 </div>

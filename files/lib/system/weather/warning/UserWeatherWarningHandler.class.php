@@ -54,7 +54,7 @@ class UserWeatherWarningHandler extends SingletonFactory
     protected function init(): void
     {
         if (MODULE_WEATHER_WARNING) {
-            $this->warnings = WeatherWarningCacheBuilder::getInstance()->getData([], 'warnings');
+            $this->warnings = WeatherWarningCacheBuilder::getInstance()->getData([], 'weatherAlerts');
 
             $this->setRegion(WEATHER_WARNING_DEFAULT_REGION);
 
