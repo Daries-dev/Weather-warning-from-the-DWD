@@ -99,7 +99,29 @@ final class WeatherWarning
 
     public function getIcon(): string
     {
-        return '<img src="' . WCF::getPath() . 'images/weather/icon_' . $this->getType() . '_' . $this->getLevel() . '.png" alt="">';
+        $level = $this->getLevel();
+
+        // individual level
+        switch ($this->getType()) {
+            case 8:
+                if ($level > 38) {
+                    $level = 2;
+                } else {
+                    $level = 1;
+                }
+                break;
+
+            case 9:
+                $level = 1;
+                break;
+        }
+
+        return \sprintf(
+            '<img src="%simages/weather/icon_%d_%d.png" alt="">',
+            WCF::getPath(),
+            $this->getType(),
+            $level
+        );
     }
 
     public function getInstruction(): string
