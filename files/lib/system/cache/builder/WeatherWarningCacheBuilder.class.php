@@ -99,11 +99,20 @@ class WeatherWarningCacheBuilder extends AbstractCacheBuilder
         $parsed = \str_replace('warnWetter.loadWarnings(', '', $parsed);
         $parsed = \mb_substr($parsed, 0, -2);
 
-        $weatherAlerts = JSON::decode($parsed);
-        $data['weatherAlertsTime'] = ($weatherAlerts['time'] / 1000);
+        try {
+            $weatherAlerts = JSON::decode($parsed);
+        } catch (SystemException $e) {
+            if (ENABLE_DEBUG_MODE) {
+                throw $e;
+            } else {
+                $weatherAlerts = [];
+            }
+        }
+
+        $data['weatherAlertsTime'] = ($weatherAlerts['time'] / 1000) ?? 0;
         $data['weatherAlerts'] = \array_merge_recursive(
-            $this->readWeatherAlerts($weatherAlerts['warnings']),
-            $this->readWeatherAlerts($weatherAlerts['vorabInformation'])
+            $this->readWeatherAlerts($weatherAlerts['warnings'] ?? []),
+            $this->readWeatherAlerts($weatherAlerts['vorabInformation'] ?? [])
         );
         //$this->sortWarnings($data['weatherAlerts']);
 
