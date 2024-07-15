@@ -32,7 +32,7 @@ class WeatherWarningCacheBuilder extends AbstractCacheBuilder
 
     private function getHttpClient(): ClientInterface
     {
-        return HttpFactory::makeClientWithTimeout(5);
+        return HttpFactory::makeClientWithTimeout(30);
     }
 
     private function loadImage(string $name, string $url, array &$data)
