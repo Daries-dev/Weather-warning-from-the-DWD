@@ -6,7 +6,7 @@
 define(["require", "exports", "WoltLabSuite/Core/Component/Dialog", "WoltLabSuite/Core/Helper/Selector"], function (require, exports, Dialog_1, Selector_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.setup = void 0;
+    exports.setup = setup;
     function setup() {
         (0, Selector_1.wheneverFirstSeen)("[data-weather-info-full-view]", (element) => {
             element.addEventListener("click", () => {
@@ -14,7 +14,6 @@ define(["require", "exports", "WoltLabSuite/Core/Component/Dialog", "WoltLabSuit
             });
         });
     }
-    exports.setup = setup;
     function showDialog(element) {
         const dialog = (0, Dialog_1.dialogFactory)().fromHtml(element.innerHTML).withoutControls();
         dialog.show(element.dataset.weatherInfoFullView);
