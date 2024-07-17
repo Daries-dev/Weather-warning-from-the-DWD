@@ -109,7 +109,7 @@ class WeatherWarningCacheBuilder extends AbstractCacheBuilder
             }
         }
 
-        $data['weatherAlertsTime'] = ($weatherAlerts['time'] / 1000) ?? 0;
+        $data['weatherAlertsTime'] = ($weatherAlerts['time'] ?? 0) / 1000;
         $data['weatherAlerts'] = \array_merge_recursive(
             $this->readWeatherAlerts($weatherAlerts['warnings'] ?? []),
             $this->readWeatherAlerts($weatherAlerts['vorabInformation'] ?? [])
