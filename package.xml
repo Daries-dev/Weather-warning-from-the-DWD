@@ -7,8 +7,8 @@
         <packagename language="de"><![CDATA[Wetterwarnungen vom DWD]]></packagename>
         <packagedescription><![CDATA[Displays the current severe weather warnings for Germany and your region.]]></packagedescription>
         <packagedescription language="de"><![CDATA[Zeigt die aktuellen Unwetterwarnungen für Deutschland und deiner Region an.]]></packagedescription>
-        <version>1.4.2</version>
-        <date>2024-07-15</date>
+        <version>1.4.3</version>
+        <date>2024-07-17</date>
     </packageinformation>
 
     <authorinformation>
@@ -46,6 +46,10 @@
     </instructions>
 
     <instructions type="update" fromversion="1.4.1">
+        <instruction type="file" />
+    </instructions>
+
+    <instructions type="update" fromversion="1.4.2">
         <instruction type="file" />
     </instructions>
 </package>
