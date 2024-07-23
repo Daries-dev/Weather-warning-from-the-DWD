@@ -78,18 +78,11 @@ final class WeatherWarningHandler extends SingletonFactory
 
     /**
      * Returns the weather warnings.
-     * If there are no weather warnings, returns the default structure.
      */
     public function getWeatherAlerts(): array
     {
-        $default = [
-            'weatherAlerts' => [],
-            'weatherAlertsTime' => 0,
-        ];
-
-        // Fetch from the registry and decode if it exists; otherwise return default
         $weatherAlerts = RegistryHandler::getInstance()->get(self::PACKAGE_NAME, "weatherAlerts");
-        return $weatherAlerts !== null ? \unserialize($weatherAlerts) : $default;
+        return $weatherAlerts !== null ? \unserialize($weatherAlerts) : [];
     }
 
     /**
@@ -138,16 +131,16 @@ final class WeatherWarningHandler extends SingletonFactory
             }
 
             if (!empty($weatherAlerts)) {
-                $data = [];
-                $data['weatherAlertsTime'] = ($weatherAlerts['time'] ?? 0) / 1000;
-                $data['weatherAlerts'] = \array_merge_recursive(
+                RegistryHandler::getInstance()->set(self::PACKAGE_NAME, 'weatherAlertsTime', ($weatherAlerts['time'] ?? 0) / 1000);
+                
+                $warnings = \array_merge_recursive(
                     $this->readWeatherAlerts($weatherAlerts['warnings'] ?? []),
                     $this->readWeatherAlerts($weatherAlerts['vorabInformation'] ?? [])
                 );
                 // TODO: #6 Check to see if the sortWarnings method is still needed
                 //$this->sortWarnings($data['weatherAlerts']);
 
-                RegistryHandler::getInstance()->set(self::PACKAGE_NAME, "weatherAlerts", \serialize($data));
+                RegistryHandler::getInstance()->set(self::PACKAGE_NAME, "weatherAlerts", \serialize($warnings));
             }
         }
     }
