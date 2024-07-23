@@ -2,8 +2,8 @@
 
 namespace wcf\system\box;
 
-use wcf\system\cache\builder\WeatherWarningCacheBuilder;
 use wcf\system\WCF;
+use wcf\system\weather\warning\WeatherWarningHandler;
 
 /**
  * Box that shows the german forest fire hazard index map.
@@ -19,14 +19,24 @@ class WeatherWarningForestFireHazardIndexGermanyBoxController extends AbstractBo
      */
     protected function loadContent(): void
     {
-        if (MODULE_WEATHER_WARNING && WEATHER_WARNING_ENABLE_FOREST_FIRE_HAZARD_INDEX_WBI) {
-            if (WCF::getUser()->userID && !WCF::getUser()->getUserOption('weatherWarningForestFireHazardIndexGermanyEnable')) return;
-
-            $data = [
-                'forestFireHazardIndexMap' => WeatherWarningCacheBuilder::getInstance()->getData([], 'forestFireHazardIndexWBI')
-            ];
-
-            $this->content = WCF::getTPL()->fetch('boxWeatherWarningForestFireHazardIndexGermany', 'wcf', $data, true);
+        if (!MODULE_WEATHER_WARNING || !WEATHER_WARNING_ENABLE_FOREST_FIRE_HAZARD_INDEX_WBI) {
+            return;
         }
+
+        $user = WCF::getUser();
+        if (!$user->userID || !$user->getUserOption('weatherWarningForestFireHazardIndexGermanyEnable')) {
+            return;
+        }
+
+        $forestFireHazardIndexMap = WeatherWarningHandler::getInstance()->getForestFireHazardIndexWBI();
+
+        $this->content = WCF::getTPL()->fetch(
+            'boxWeatherWarningForestFireHazardIndexGermany',
+            'wcf',
+            [
+                'forestFireHazardIndexMap' => $forestFireHazardIndexMap,
+            ],
+            true
+        );
     }
 }
