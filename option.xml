@@ -32,9 +32,4 @@
             </option>
         </options>
     </import>
-
-    <delete>
-        <option name="weather_warning_enable_forestFireHazardIndexWBI" />
-        <option name="weather_warning_enable_grasslandFireIndex" />
-    </delete>
 </data>
