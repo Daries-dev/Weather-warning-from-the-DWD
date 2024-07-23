@@ -2,7 +2,6 @@
 
 namespace wcf\system\weather\warning;
 
-use wcf\system\cache\builder\WeatherWarningCacheBuilder;
 use wcf\system\event\EventHandler;
 use wcf\system\SingletonFactory;
 use wcf\system\WCF;
@@ -53,21 +52,24 @@ class UserWeatherWarningHandler extends SingletonFactory
      */
     protected function init(): void
     {
-        if (MODULE_WEATHER_WARNING) {
-            $this->warnings = WeatherWarningCacheBuilder::getInstance()->getData([], 'weatherAlerts');
-
-            $this->setRegion(WEATHER_WARNING_DEFAULT_REGION);
-
-            if (WCF::getUser()->userID) {
-                $region = WCF::getUser()->getUserOption('weatherWarningRegion');
-
-                if ($region !== null && !empty($region)) {
-                    $this->setRegion($region);
-                }
-            }
-
-            EventHandler::getInstance()->fireAction($this, 'init');
+        if (!MODULE_WEATHER_WARNING) {
+            return;
         }
+
+        $this->warnings = WeatherWarningHandler::getInstance()->getWeatherAlerts();
+
+        $this->setRegion(WEATHER_WARNING_DEFAULT_REGION);
+
+        $user = WCF::getUser();
+        if ($user->userID) {
+            $userRegion = $user->getUserOption('weatherWarningRegion');
+
+            if (!empty($userRegion)) {
+                $this->setRegion($userRegion);
+            }
+        }
+
+        EventHandler::getInstance()->fireAction($this, 'init');
     }
 
     /**
