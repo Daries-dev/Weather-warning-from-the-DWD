@@ -77,6 +77,22 @@ final class WeatherWarningHandler extends SingletonFactory
     }
 
     /**
+     * Returns the weather warnings.
+     * If there are no weather warnings, returns the default structure.
+     */
+    public function getWeatherAlerts(): array
+    {
+        $default = [
+            'weatherAlerts' => [],
+            'weatherAlertsTime' => 0,
+        ];
+
+        // Fetch from the registry and decode if it exists; otherwise return default
+        $weatherAlerts = RegistryHandler::getInstance()->get(self::PACKAGE_NAME, "weatherAlerts");
+        return $weatherAlerts !== null ? \unserialize($weatherAlerts) : $default;
+    }
+
+    /**
      * @inheritDoc
      */
     protected function init(): void
