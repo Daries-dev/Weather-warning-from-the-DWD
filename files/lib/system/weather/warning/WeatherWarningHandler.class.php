@@ -86,6 +86,14 @@ final class WeatherWarningHandler extends SingletonFactory
     }
 
     /**
+     * Returns the time of the weather warnings.
+     */
+    public function getWeatherAlertsTime(): int
+    {
+        return RegistryHandler::getInstance()->get(self::PACKAGE_NAME, "weatherAlertsTime") ?? 0;
+    }
+
+    /**
      * @inheritDoc
      */
     protected function init(): void
@@ -132,7 +140,7 @@ final class WeatherWarningHandler extends SingletonFactory
 
             if (!empty($weatherAlerts)) {
                 RegistryHandler::getInstance()->set(self::PACKAGE_NAME, 'weatherAlertsTime', ($weatherAlerts['time'] ?? 0) / 1000);
-                
+
                 $warnings = \array_merge_recursive(
                     $this->readWeatherAlerts($weatherAlerts['warnings'] ?? []),
                     $this->readWeatherAlerts($weatherAlerts['vorabInformation'] ?? [])
