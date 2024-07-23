@@ -131,7 +131,7 @@ class WeatherWarningCacheBuilder extends AbstractCacheBuilder
             foreach ($infos as $info) {
                 $weatherWarning = WeatherWarning::createWarning($info);
                 $list[$weatherWarning->getRegionName()] ??= [];
-                $list[$weatherWarning->getRegionName()][] = $weatherWarning;
+                $list[$weatherWarning->getRegionName()][] = $weatherWarning;    
             }
         }
         return $list;
