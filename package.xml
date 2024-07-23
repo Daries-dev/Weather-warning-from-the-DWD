@@ -41,15 +41,8 @@
         <instruction type="script">acp/install_dev.daries.weatherWarning.php</instruction>
     </instructions>
 
-    <instructions type="update" fromversion="1.4.0">
+    <instructions type="update" fromversion="1.4.3">
         <instruction type="file" />
-    </instructions>
-
-    <instructions type="update" fromversion="1.4.1">
-        <instruction type="file" />
-    </instructions>
-
-    <instructions type="update" fromversion="1.4.2">
-        <instruction type="file" />
+        <instruction type="fileDelete" />
     </instructions>
 </package>
