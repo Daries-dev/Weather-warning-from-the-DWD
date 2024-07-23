@@ -4,6 +4,7 @@ namespace wcf\system\box;
 
 use wcf\system\WCF;
 use wcf\system\weather\warning\UserWeatherWarningHandler;
+use wcf\system\weather\warning\WeatherWarningHandler;
 
 /**
  * Box that shows the region warning weather information.
@@ -19,19 +20,32 @@ class WeatherWarningRegionBoxController extends AbstractBoxController
      */
     protected function loadContent(): void
     {
-        if (MODULE_WEATHER_WARNING) {
-            if (WCF::getUser()->userID && !WCF::getUser()->getUserOption('weatherWarningRegionEnable')) return;
-            if (!WCF::getUser()->userID && empty(UserWeatherWarningHandler::getInstance()->getRegion())) return;
-
-            $this->content = WCF::getTPL()->fetch(
-                'boxWeatherWarningRegion',
-                'wcf',
-                [
-                    'region' => UserWeatherWarningHandler::getInstance()->getRegion(),
-                    'warnings' => UserWeatherWarningHandler::getInstance()->getWarnings()
-                ],
-                true
-            );
+        if (!MODULE_WEATHER_WARNING) {
+            return;
         }
+
+        $user = WCF::getUser();
+        $weatherWarningHandler = UserWeatherWarningHandler::getInstance();
+        $region = $weatherWarningHandler->getRegion();
+        $warnings = $weatherWarningHandler->getWarnings();
+        $warningsTime = WeatherWarningHandler::getInstance()->getWeatherAlertsTime();
+
+        if (
+            ($user->userID && !$user->getUserOption('weatherWarningRegionEnable')) ||
+            (!$user->userID && empty($region))
+        ) {
+            return;
+        }
+
+        $this->content = WCF::getTPL()->fetch(
+            'boxWeatherWarningRegion',
+            'wcf',
+            [
+                'region' => $region,
+                'warnings' => $warnings,
+                'warningsTime' => $warningsTime,
+            ],
+            true
+        );
     }
 }
