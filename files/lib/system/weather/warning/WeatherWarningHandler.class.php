@@ -46,6 +46,11 @@ final class WeatherWarningHandler extends SingletonFactory
     const PACKAGE_NAME = "dev.daries.weatherWarning";
 
     /**
+     * The HTTP client instance used for making requests.
+     */
+    private ClientInterface $httpClient;
+
+    /**
      * Returns the forest fire hazard index.
      */
     public function getForestFireHazardIndexWBI(): string
@@ -74,7 +79,11 @@ final class WeatherWarningHandler extends SingletonFactory
      */
     private function getHttpClient(): ClientInterface
     {
-        return HttpFactory::makeClientWithTimeout(30);
+        if (!isset($this->httpClient)) {
+            $this->httpClient = HttpFactory::makeClientWithTimeout(10);
+        }
+
+        return $this->httpClient;
     }
 
     /**
@@ -100,7 +109,7 @@ final class WeatherWarningHandler extends SingletonFactory
     protected function init(): void
     {
         $lastUpdate = RegistryHandler::getInstance()->get(self::PACKAGE_NAME, "lastUpdate");
-        if ($lastUpdate === null || $lastUpdate < TIME_NOW - 600) {
+        if ($lastUpdate === null || $lastUpdate < TIME_NOW - 900) {
             RegistryHandler::getInstance()->set(self::PACKAGE_NAME, "lastUpdate", TIME_NOW);
 
             if (WEATHER_WARNING_ENABLE_FOREST_FIRE_HAZARD_INDEX_WBI) {
