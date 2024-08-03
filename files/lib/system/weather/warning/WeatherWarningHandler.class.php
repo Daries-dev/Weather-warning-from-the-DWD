@@ -155,8 +155,8 @@ final class WeatherWarningHandler extends SingletonFactory
                     $this->readWeatherAlerts($weatherAlerts['warnings'] ?? []),
                     $this->readWeatherAlerts($weatherAlerts['vorabInformation'] ?? [])
                 );
-                // TODO: #6 Check to see if the sortWarnings method is still needed
-                //$this->sortWarnings($data['weatherAlerts']);
+
+                $this->sortWeatherWarnings($warnings);
 
                 RegistryHandler::getInstance()->set(self::PACKAGE_NAME, "weatherAlerts", \serialize($warnings));
             }
@@ -216,16 +216,14 @@ final class WeatherWarningHandler extends SingletonFactory
     }
 
     /**
-     * Sorts the alerts by 'level', 'start' and 'end' per region area.
+     * Sorts an array of WeatherWarning objects by region name and within each region by start time.
      */
-    private function sortWarnings(array &$warnings): void
+    private function sortWeatherWarnings(array &$weatherWarnings): void
     {
-        foreach ($warnings as $regionName => $warningDatas) {
-            $end = \array_column($warningDatas, 'end');
-            $level = \array_column($warningDatas, 'level');
-            $start = \array_column($warningDatas, 'start');
+        ksort($weatherWarnings);
 
-            \array_multisort($level, SORT_ASC, $start, SORT_ASC, $end, SORT_ASC, $warningDatas);
+        foreach ($weatherWarnings as &$warnings) {
+            \usort($warnings, fn ($a, $b) => $a->getStart() <=> $b->getStart());
         }
     }
 }
