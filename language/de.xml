@@ -55,6 +55,7 @@
 <br />
 Um {if LANGUAGE_USE_INFORMAL_VARIANT}Deine{else}Ihre{/if} Anzeige zu personalisieren, {if $__wcf->getUserProfileHandler()->canEditOwnProfile()}<a href="{link controller='User' object=$__wcf->user forceFrontend=true}editOnInit=true#about{/link}">{if LANGUAGE_USE_INFORMAL_VARIANT}kannst Du Dein{else}können Sie Ihr{/if} Profil</a>{else}{if LANGUAGE_USE_INFORMAL_VARIANT}kannst Du Dein{else}können Sie Ihr{/if}{/if} bearbeiten und {if LANGUAGE_USE_INFORMAL_VARIANT}Deine{else}Ihre{/if} Region angeben.]]></item>
             <item name="wcf.weatherWarning.start"><![CDATA[Beginn]]></item>
+            <item name="wcf.weatherWarning.warningTime"><![CDATA[Letzte Aktualisierung: {time time=$warningTime}]]></item>
             <item name="wcf.weatherWarning.viewFullSize"><![CDATA[Großansicht]]></item>
         </category>
     </import>

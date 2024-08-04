@@ -28,7 +28,7 @@ class WeatherWarningRegionBoxController extends AbstractBoxController
         $weatherWarningHandler = UserWeatherWarningHandler::getInstance();
         $region = $weatherWarningHandler->getRegion();
         $warnings = $weatherWarningHandler->getWarnings();
-        $warningsTime = WeatherWarningHandler::getInstance()->getWeatherWarningTime();
+        $warningTime = WeatherWarningHandler::getInstance()->getWeatherWarningTime();
 
         if (
             ($user->userID && !$user->getUserOption('weatherWarningRegionEnable')) ||
@@ -43,7 +43,7 @@ class WeatherWarningRegionBoxController extends AbstractBoxController
             [
                 'region' => $region,
                 'warnings' => $warnings,
-                'warningsTime' => $warningsTime,
+                'warningTime' => $warningTime,
             ],
             true
         );
