@@ -44,5 +44,5 @@
 </div>
 
 <div class="weatherWarningFooter">
-    {lang}wcf.weatherWarning.footer{/lang}
+    <div class="allWarnings">{lang}wcf.weatherWarning.allWarnings{/lang}</div>
 </div>
