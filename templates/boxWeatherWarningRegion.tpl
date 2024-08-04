@@ -42,3 +42,7 @@
         {/if}
     </div>
 </div>
+
+<div class="weatherWarningFooter">
+    {lang}wcf.weatherWarning.footer{/lang}
+</div>
