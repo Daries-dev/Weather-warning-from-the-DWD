@@ -56,7 +56,7 @@ class UserWeatherWarningHandler extends SingletonFactory
             return;
         }
 
-        $this->warnings = WeatherWarningHandler::getInstance()->getWeatherAlerts();
+        $this->warnings = WeatherWarningHandler::getInstance()->getWeatherWarning();
 
         $this->setRegion(WEATHER_WARNING_DEFAULT_REGION);
 

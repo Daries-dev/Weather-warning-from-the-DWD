@@ -89,18 +89,18 @@ final class WeatherWarningHandler extends SingletonFactory
     /**
      * Returns the weather warnings.
      */
-    public function getWeatherAlerts(): array
+    public function getWeatherWarning(): array
     {
-        $weatherAlerts = RegistryHandler::getInstance()->get(self::PACKAGE_NAME, "weatherAlerts");
-        return $weatherAlerts !== null ? \unserialize($weatherAlerts) : [];
+        $weatherWarning = RegistryHandler::getInstance()->get(self::PACKAGE_NAME, "weatherWarning");
+        return $weatherWarning !== null ? \unserialize($weatherWarning) : [];
     }
 
     /**
      * Returns the time of the weather warnings.
      */
-    public function getWeatherAlertsTime(): int
+    public function getWeatherWarningTime(): int
     {
-        return RegistryHandler::getInstance()->get(self::PACKAGE_NAME, "weatherAlertsTime") ?? 0;
+        return RegistryHandler::getInstance()->get(self::PACKAGE_NAME, "weatherWarningTime") ?? 0;
     }
 
     /**
@@ -130,7 +130,7 @@ final class WeatherWarningHandler extends SingletonFactory
                 'accept' => 'application/json',
             ]);
 
-            $weatherAlerts = [];
+            $weatherWarning = [];
             try {
                 $response = $this->getHttpClient()->send($request);
                 $parsed = (string)$response->getBody();
@@ -138,7 +138,7 @@ final class WeatherWarningHandler extends SingletonFactory
                 $parsed = \mb_substr($parsed, 0, -2);
 
                 try {
-                    $weatherAlerts = JSON::decode($parsed);
+                    $weatherWarning = JSON::decode($parsed);
                 } catch (SystemException $e) {
                     if (ENABLE_DEBUG_MODE) {
                         throw $e;
@@ -148,17 +148,17 @@ final class WeatherWarningHandler extends SingletonFactory
                 // nothings
             }
 
-            if (!empty($weatherAlerts)) {
-                RegistryHandler::getInstance()->set(self::PACKAGE_NAME, 'weatherAlertsTime', ($weatherAlerts['time'] ?? 0) / 1000);
+            if (!empty($weatherWarning)) {
+                RegistryHandler::getInstance()->set(self::PACKAGE_NAME, 'weatherWarningTime', ($weatherWarning['time'] ?? 0) / 1000);
 
                 $warnings = \array_merge_recursive(
-                    $this->readWeatherAlerts($weatherAlerts['warnings'] ?? []),
-                    $this->readWeatherAlerts($weatherAlerts['vorabInformation'] ?? [])
+                    $this->readWeatherWarning($weatherWarning['warnings'] ?? []),
+                    $this->readWeatherWarning($weatherWarning['vorabInformation'] ?? [])
                 );
 
                 $this->sortWeatherWarnings($warnings);
 
-                RegistryHandler::getInstance()->set(self::PACKAGE_NAME, "weatherAlerts", \serialize($warnings));
+                RegistryHandler::getInstance()->set(self::PACKAGE_NAME, "weatherWarning", \serialize($warnings));
             }
         }
     }
@@ -198,14 +198,14 @@ final class WeatherWarningHandler extends SingletonFactory
     }
 
     /**
-     * Reads weather alerts and sorts by region.
+     * Reads weather warnings and sorts by region.
      */
-    private function readWeatherAlerts(array $weatherAlerts): array
+    private function readWeatherWarning(array $weatherWarning): array
     {
         $list = [];
-        if (empty($weatherAlerts)) return $list;
+        if (empty($weatherWarning)) return $list;
 
-        foreach ($weatherAlerts as $infos) {
+        foreach ($weatherWarning as $infos) {
             foreach ($infos as $info) {
                 $weatherWarning = WeatherWarning::createWarning($info);
                 $list[$weatherWarning->getRegionName()] ??= [];
