@@ -33,6 +33,7 @@
         <instruction type="coreObject" />
         <instruction type="objectType" />
         <instruction type="box" />
+        <instruction type="page" />
         <instruction type="option" />
         <instruction type="userOption" />
         <instruction type="eventListener" />
@@ -44,5 +45,6 @@
     <instructions type="update" fromversion="1.4.3">
         <instruction type="file" />
         <instruction type="fileDelete" />
+        <instruction type="page" />
     </instructions>
 </package>

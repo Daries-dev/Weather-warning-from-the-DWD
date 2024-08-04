@@ -7,10 +7,12 @@
 }
 
 .weatherWarningRegion {
-	&:not(:first-child) {
-		border-top: 1px solid $wcfContentBorder;
-		margin-top: 15px;
-		padding-top: 10px;
+	&.warningBox {
+		&:not(:first-child) {
+			border-top: 1px solid $wcfContentBorder;
+			margin-top: 10px;
+			padding-top: 10px;
+		}
 	}
 
 	> dl,

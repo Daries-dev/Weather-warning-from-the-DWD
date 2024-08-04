@@ -5,7 +5,7 @@
     <div class="weatherWarningContent">
         {if !$region|empty}
             {foreach from=$warnings item=warning}
-                <div class="weatherWarningRegion">
+                <div class="weatherWarningRegion warningBox">
                     <div class="headline">
                         {@$warning->getIcon()}
                         <span>{$warning->getHeadline()}</span>
