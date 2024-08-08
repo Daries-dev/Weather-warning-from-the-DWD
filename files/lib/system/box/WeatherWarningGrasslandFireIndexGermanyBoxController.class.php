@@ -24,7 +24,7 @@ class WeatherWarningGrasslandFireIndexGermanyBoxController extends AbstractBoxCo
         }
 
         $user = WCF::getUser();
-        if (!$user->userID || !$user->getUserOption('weatherWarningGrasslandFireIndexGermanyEnable')) {
+        if ($user->userID && !$user->getUserOption('weatherWarningGrasslandFireIndexGermanyEnable')) {
             return;
         }
 

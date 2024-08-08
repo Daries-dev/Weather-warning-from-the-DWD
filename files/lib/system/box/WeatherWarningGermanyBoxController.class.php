@@ -24,7 +24,7 @@ class WeatherWarningGermanyBoxController extends AbstractBoxController
         }
 
         $user = WCF::getUser();
-        if (!$user->userID || !$user->getUserOption('weatherWarningGermanyEnable')) {
+        if ($user->userID && !$user->getUserOption('weatherWarningGermanyEnable')) {
             return;
         }
 

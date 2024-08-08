@@ -31,8 +31,8 @@ class WeatherWarningRegionBoxController extends AbstractBoxController
         $warningTime = WeatherWarningHandler::getInstance()->getWeatherWarningTime();
 
         if (
-            ($user->userID && !$user->getUserOption('weatherWarningRegionEnable')) ||
-            (!$user->userID && empty($region))
+            $user->userID &&
+            !$user->getUserOption('weatherWarningRegionEnable')
         ) {
             return;
         }

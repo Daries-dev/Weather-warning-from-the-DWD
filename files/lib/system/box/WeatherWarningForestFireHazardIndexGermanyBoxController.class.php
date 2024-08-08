@@ -24,7 +24,7 @@ class WeatherWarningForestFireHazardIndexGermanyBoxController extends AbstractBo
         }
 
         $user = WCF::getUser();
-        if (!$user->userID || !$user->getUserOption('weatherWarningForestFireHazardIndexGermanyEnable')) {
+        if ($user->userID && !$user->getUserOption('weatherWarningForestFireHazardIndexGermanyEnable')) {
             return;
         }
 
