@@ -36,9 +36,21 @@ final class WeatherWarningHandler extends SingletonFactory
     const GERMANY_REGION_URL = 'https://www.dwd.de/DWD/warnungen/warnapp/json/warnings.json';
 
     /**
-     * URL for the map of Germany with warnings.
+     * URLs for various warning cards in Germany.
      */
-    const GERMANY_MAP_URL = 'https://www.dwd.de/DWD/warnungen/warnapp_gemeinden/json/warnungen_gemeinde_map_de.png';
+    const GERMANY_MAP_URLS = [
+        'blackIce' => 'https://www.dwd.de/DWD/warnungen/warnapp_gemeinden/json/warnungen_gemeinde_map_de_glatteis.png',
+        'frost' => 'https://www.dwd.de/DWD/warnungen/warnapp_gemeinden/json/warnungen_gemeinde_map_de_frost.png',
+        'fog' => 'https://www.dwd.de/DWD/warnungen/warnapp_gemeinden/json/warnungen_gemeinde_map_de_nebel.png',
+        'heat' => 'https://www.dwd.de/DWD/warnungen/warnapp_gemeinden/json/warnungen_gemeinde_map_de_hitze.png',
+        'map' => 'https://www.dwd.de/DWD/warnungen/warnapp_gemeinden/json/warnungen_gemeinde_map_de.png',
+        'rain' => 'https://www.dwd.de/DWD/warnungen/warnapp_gemeinden/json/warnungen_gemeinde_map_de_regen.png',
+        'snow' => 'https://www.dwd.de/DWD/warnungen/warnapp_gemeinden/json/warnungen_gemeinde_map_de_schnee.png',
+        'storm' => 'https://www.dwd.de/DWD/warnungen/warnapp_gemeinden/json/warnungen_gemeinde_map_de_sturm.png',
+        'thaw' => 'https://www.dwd.de/DWD/warnungen/warnapp_gemeinden/json/warnungen_gemeinde_map_de_tauwetter.png',
+        'thunder' => 'https://www.dwd.de/DWD/warnungen/warnapp_gemeinden/json/warnungen_gemeinde_map_de_gewitter.png',
+        'uv' => 'https://www.dwd.de/DWD/warnungen/warnapp_gemeinden/json/warnungen_gemeinde_map_de_uv.png',
+    ];
 
     /**
      * Package name for the registration action.
@@ -61,9 +73,10 @@ final class WeatherWarningHandler extends SingletonFactory
     /**
      * Returns the map of Germany.
      */
-    public function getGermanyMap(): string
+    public function getGermanyMap(string $key): string
     {
-        return RegistryHandler::getInstance()->get(self::PACKAGE_NAME, "germanyMap") ?? "";
+        $key = \sprintf('germanyMap_%s', $key);
+        return RegistryHandler::getInstance()->get(self::PACKAGE_NAME, $key) ?? "";
     }
 
     /**
@@ -122,8 +135,11 @@ final class WeatherWarningHandler extends SingletonFactory
                 $this->loadImage('grasslandFireIndex', self::GERMANY_GRASSLANDFIREINDEX_URL);
             }
 
-            // load germany map
-            $this->loadImage('germanyMap', self::GERMANY_MAP_URL);
+            // load various warning cards in Germany.
+            foreach (self::GERMANY_MAP_URLS as $mapKey => $mapURL) {
+                $mapKey = \sprintf('germanyMap_%s', $mapKey);
+                $this->loadImage($mapKey, $mapURL);
+            }
 
             // load region warning information
             $request = new Request('GET', self::GERMANY_REGION_URL, [
@@ -134,8 +150,9 @@ final class WeatherWarningHandler extends SingletonFactory
             try {
                 $response = $this->getHttpClient()->send($request);
                 $parsed = (string)$response->getBody();
-                $parsed = \str_replace('warnWetter.loadWarnings(', '', $parsed);
-                $parsed = \mb_substr($parsed, 0, -2);
+
+                preg_match('/warnWetter\.loadWarnings\((\{.*\})\);/', $parsed, $matches);
+                $parsed = $matches[1] ?? "{}";
 
                 try {
                     $weatherWarning = JSON::decode($parsed);
@@ -223,7 +240,7 @@ final class WeatherWarningHandler extends SingletonFactory
         ksort($weatherWarnings);
 
         foreach ($weatherWarnings as &$warnings) {
-            \usort($warnings, fn ($a, $b) => $a->getStart() <=> $b->getStart());
+            \usort($warnings, fn($a, $b) => $a->getStart() <=> $b->getStart());
         }
     }
 }

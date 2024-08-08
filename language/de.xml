@@ -32,6 +32,7 @@
 
         <category name="wcf.weatherWarning">
             <item name="wcf.weatherWarning.allWarnings"><![CDATA[<a href="{link controller='WeatherWarnings'}{/link}">Alle Warnungen</a>]]></item>
+            <item name="wcf.weatherWarning.box.settings"><![CDATA[Deutschlandkarte (nach Warnkriterien)]]></item>
             <item name="wcf.weatherWarning.dwd"><![CDATA[Wetterwarnung DWD]]></item>
             <item name="wcf.weatherWarning.dwd.legend1"><![CDATA[Warnungen vor extremem Unwetter (Stufe 4)]]></item>
             <item name="wcf.weatherWarning.dwd.legend2"><![CDATA[Unwetterwarnungen (Stufe 3)]]></item>
@@ -42,6 +43,17 @@
             <item name="wcf.weatherWarning.dwd.legend7"><![CDATA[Hitzewarnung]]></item>
             <item name="wcf.weatherWarning.dwd.legend8"><![CDATA[UV-Warnung]]></item>
             <item name="wcf.weatherWarning.dwd.legend9"><![CDATA[Keine Warnungen]]></item>
+            <item name="wcf.weatherWarning.dwd.map"><![CDATA[Alle]]></item>
+            <item name="wcf.weatherWarning.dwd.map.blackIce"><![CDATA[Glätte, Glatteis]]></item>
+            <item name="wcf.weatherWarning.dwd.map.frost"><![CDATA[Frost]]></item>
+            <item name="wcf.weatherWarning.dwd.map.fog"><![CDATA[Nebel]]></item>
+            <item name="wcf.weatherWarning.dwd.map.heat"><![CDATA[Hitze]]></item>
+            <item name="wcf.weatherWarning.dwd.map.rain"><![CDATA[Stark- oder Dauerregen]]></item>
+            <item name="wcf.weatherWarning.dwd.map.snow"><![CDATA[Schneefall]]></item>
+            <item name="wcf.weatherWarning.dwd.map.storm"><![CDATA[Wind (Sturm, Orkan)]]></item>
+            <item name="wcf.weatherWarning.dwd.map.thaw"><![CDATA[Tauwetter]]></item>
+            <item name="wcf.weatherWarning.dwd.map.thunder"><![CDATA[Gewitter]]></item>
+            <item name="wcf.weatherWarning.dwd.map.uv"><![CDATA[UV-Strahlung]]></item>
             <item name="wcf.weatherWarning.dwd.region"><![CDATA[Wetterwarnungen DWD ({if $region|empty}Region{else}{$region}{/if})]]></item>
             <item name="wcf.weatherWarning.empty"><![CDATA[Aktuell liegt für die Region ({$region}) keine Warnungen vor.]]></item>
             <item name="wcf.weatherWarning.empty.region"><![CDATA[Wenn {if LANGUAGE_USE_INFORMAL_VARIANT}Du in deinem{else}Sie in Ihrem{/if} {if $__wcf->getUserProfileHandler()->canEditOwnProfile()}<a href="{link controller='User' object=$__wcf->user}editOnInit=true#about{/link}">Profil</a>{else}Profil{/if} das Feld "Region" {if LANGUAGE_USE_INFORMAL_VARIANT}ausfüllst{else}ausfüllen{/if}, so {if LANGUAGE_USE_INFORMAL_VARIANT}erhältst Du{else}erhalten Sie{/if} hier regionale Warnmeldungen vom DWD.]]></item>
