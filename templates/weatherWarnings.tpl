@@ -1,3 +1,5 @@
+{capture assign='contentDescription'}{lang}wcf.weatherWarning.warningTime{/lang}{/capture}
+
 {include file='header'}
 
 {hascontent}

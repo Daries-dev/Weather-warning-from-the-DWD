@@ -39,6 +39,7 @@ class WeatherWarningsPage extends MultipleLinkPage
 
         WCF::getTPL()->assign([
             'weatherWarnings' => $this->weatherWarnings,
+            'warningTime' => WeatherWarningHandler::getInstance()->getWeatherWarningTime(),
         ]);
     }
 
