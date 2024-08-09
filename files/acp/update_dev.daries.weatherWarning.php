@@ -1,6 +1,7 @@
 <?php
 
-use wcf\system\WCF;
+use wcf\data\box\Box;
+use wcf\data\box\BoxAction;
 
 /**
  * @author  Marco Daries", Alexander Langer (Source of ideas)
@@ -8,6 +9,15 @@ use wcf\system\WCF;
  * @license Daries.dev - Free License <https://daries.dev/en/license-for-free-plugins>
  */
 
-$sql = "TRUNCATE wcf1_weather_warning_region";
-$statement = WCF::getDB()->prepare($sql);
-$statement->execute();
+$box = Box::getBoxByIdentifier('dev.daries.weatherWarning.germany');
+if ($box !== false) {
+    $additionalData = $box->additionalData;
+    $additionalData['viewMapInfo'] = 1;
+
+    $action = new BoxAction([$box], 'update', [
+        'data' => [
+            'additionalData' => \serialize($additionalData),
+        ]
+    ]);
+    $action->executeAction();
+}

@@ -12,5 +12,15 @@
         </dd>
     </dl>
 
+    <dl>
+        <dt></dt>
+        <dd>
+            <label>
+        <input type="checkbox" name="viewMapInfo" value="1" {if $viewMapInfo} checked{/if}>
+                {lang}wcf.weatherWarning.box.settings.viewMapInfo{/lang}
+                </label>
+        </dd>
+    </dl>
+
     {event name='fields'}
 </section>

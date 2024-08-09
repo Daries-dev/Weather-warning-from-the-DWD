@@ -37,6 +37,7 @@
             <content language="en">
                 <title>Weather warnings DWD</title>
             </content>
+            <viewMapInfo>1</viewMapInfo>
         </box>
         <box identifier="dev.daries.weatherWarning.grasslandFireIndex">
             <name language="de">Grasland - Feuerindex (Deutschland)</name>

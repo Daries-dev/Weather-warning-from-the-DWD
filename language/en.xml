@@ -33,6 +33,7 @@
         <category name="wcf.weatherWarning">
             <item name="wcf.weatherWarning.allWarnings"><![CDATA[<a href="{link controller='WeatherWarnings'}{/link}">All warnings</a>]]></item>
             <item name="wcf.weatherWarning.box.settings"><![CDATA[Map of Germany (by warning criteria)]]></item>
+            <item name="wcf.weatherWarning.box.settings.viewMapInfo"><![CDATA[Show map of Germany Information]]></item>
             <item name="wcf.weatherWarning.dwd"><![CDATA[Weather warnings DWD]]></item>
             <item name="wcf.weatherWarning.dwd.legend1"><![CDATA[Warnings of extreme weather (Level 4)]]></item>
             <item name="wcf.weatherWarning.dwd.legend2"><![CDATA[Warnings of severe weather (Level 3)]]></item>

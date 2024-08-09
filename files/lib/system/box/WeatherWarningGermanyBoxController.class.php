@@ -17,6 +17,7 @@ use wcf\util\StringUtil;
 class WeatherWarningGermanyBoxController extends AbstractBoxController implements IConditionBoxController
 {
     protected string $map = "map";
+    protected bool $viewMapInfo = false;
 
     /**
      * @inheritDoc
@@ -25,6 +26,7 @@ class WeatherWarningGermanyBoxController extends AbstractBoxController implement
     {
         return [
             'map' => $this->map,
+            'viewMapInfo' => $this->viewMapInfo,
         ];
     }
 
@@ -68,6 +70,7 @@ class WeatherWarningGermanyBoxController extends AbstractBoxController implement
         return WCF::getTPL()->fetch('boxWeatherWarningGermanyConditions', 'wcf', [
             'map' => $this->map,
             'mapOptions' => $mapOptions,
+            'viewMapInfo' => $this->viewMapInfo,
         ], true);
     }
 
@@ -93,15 +96,13 @@ class WeatherWarningGermanyBoxController extends AbstractBoxController implement
             [
                 'germanyMap' => $germanyMap,
                 'map' => $this->map,
+                'viewMapInfo' => $this->viewMapInfo,
             ],
             true
         );
     }
 
-    public function getMapOptions(): array
-    {
-        
-    }
+    public function getMapOptions(): array {}
 
     /**
      * @inheritDoc
@@ -110,6 +111,10 @@ class WeatherWarningGermanyBoxController extends AbstractBoxController implement
     {
         if (!empty($_POST['map'])) {
             $this->map = StringUtil::trim($_POST['map']);
+        }
+
+        if (!empty($_POST['viewMapInfo'])) {
+            $this->viewMapInfo = true;
         }
     }
 
@@ -120,8 +125,14 @@ class WeatherWarningGermanyBoxController extends AbstractBoxController implement
     {
         parent::setBox($box);
 
-        if ($setConditionData && $this->box->map) {
-            $this->map = $this->box->map;
+        if ($setConditionData) {
+            if ($this->box->map) {
+                $this->map = $this->box->map;
+            }
+
+            if ($this->box->viewMapInfo) {
+                $this->viewMapInfo = $this->box->viewMapInfo;
+            }
         }
     }
 
