@@ -65,14 +65,11 @@ class WeatherWarningsPage extends MultipleLinkPage
 
         $this->calculateNumberOfPages();
 
-        $i = 0;
-        foreach ($this->weatherWarnings as $key => $val) {
-            $i++;
-
-            if ($i < $this->startIndex || $i > $this->endIndex) {
-                unset($this->weatherWarnings[$key]);
-                continue;
-            }
-        }
+        $this->weatherWarnings = \array_slice(
+            $this->weatherWarnings,
+            $this->startIndex - 1,
+            $this->endIndex - $this->startIndex + 1,
+            true
+        );
     }
 }
