@@ -17,7 +17,7 @@
                         <div class="legendBoxText">{lang}wcf.weatherWarning.dwd.legend2{/lang}</div>
                     </div>
                     <div>
-                        <div class="legendBox warningLegend3" style="--weatherWarningLegendColor: rgba(261, 146, 0, 1)">
+                        <div class="legendBox warningLegend3" style="--weatherWarningLegendColor: rgba(255, 146, 0, 1)">
                         </div>
                         <div class="legendBoxText">{lang}wcf.weatherWarning.dwd.legend3{/lang}</div>
                     </div>
