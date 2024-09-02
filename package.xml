@@ -3,17 +3,17 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.woltlab.com https://www.woltlab.com/XSD/6.0/package.xsd">
     <packageinformation>
-        <packagename><![CDATA[Weather warnings from the DWD]]></packagename>
-        <packagename language="de"><![CDATA[Wetterwarnungen vom DWD]]></packagename>
-        <packagedescription><![CDATA[Displays the current severe weather warnings for Germany and your region.]]></packagedescription>
-        <packagedescription language="de"><![CDATA[Zeigt die aktuellen Unwetterwarnungen für Deutschland und deiner Region an.]]></packagedescription>
-        <version>1.5.0</version>
-        <date>2024-08-09</date>
+        <packagename>Weather warnings from the DWD</packagename>
+        <packagename language="de">Wetterwarnungen vom DWD</packagename>
+        <packagedescription>Displays the current severe weather warnings for Germany and your region.</packagedescription>
+        <packagedescription language="de">Zeigt die aktuellen Unwetterwarnungen für Deutschland und deiner Region an.</packagedescription>
+        <version>1.5.1</version>
+        <date>2024-08-31</date>
     </packageinformation>
 
     <authorinformation>
-        <author><![CDATA[Marco Daries, Alexander Langer]]></author>
-        <authorurl><![CDATA[https://daries.dev]]></authorurl>
+        <author>Marco Daries, Alexander Langer</author>
+        <authorurl>https://daries.dev</authorurl>
     </authorinformation>
 
     <requiredpackages>
@@ -21,7 +21,7 @@
     </requiredpackages>
 
     <excludedpackages>
-        <excludedpackage version="6.1.0 Alpha 1">com.woltlab.wcf</excludedpackage>
+        <excludedpackage version="6.2.0 Alpha 1">com.woltlab.wcf</excludedpackage>
         <excludedpackage version="*">de.lrde.weatherWarning</excludedpackage>
     </excludedpackages>
 
@@ -51,5 +51,11 @@
         <instruction type="box" />
         <instruction type="language" />
         <instruction type="script">acp/update_dev.daries.weatherWarning.php</instruction>
+    </instructions>
+
+    <instructions type="update" fromversion="1.5.1">
+        <instruction type="file" />
+        <instruction type="template" />
+        <instruction type="language" />
     </instructions>
 </package>
